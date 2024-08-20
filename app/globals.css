@@ -22,3 +22,22 @@ span {
 [data-theme="developer"] .theme-based-fill {
     fill: url(#developer-gradient);
 }
+
+.checkbox {
+    --chkbg: var(--primary-color);
+    --chkfg: oklch(var(--bc));
+}
+
+@layer components {
+    .text-primary-gradient {
+        @apply bg-gradient-to-r text-transparent bg-clip-text bg-primary-gradient;
+    }
+
+    .light-border {
+        @apply border-2 border-base-content border-opacity-20;
+    }
+
+    .simple-card {
+        @apply bg-base-200 p-4 light-border rounded-2xl;
+    }
+}

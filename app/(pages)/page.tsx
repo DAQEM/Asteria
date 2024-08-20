@@ -17,7 +17,7 @@ export default async function Home() {
                     </div>
                     <div className="relative h-[36rem]">
                         <div className="h-max group-data-[theme=developer]/theme:opacity-0 opacity-100 transition-opacity duration-300 absolute inset-0 grid gap-6">
-                            <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r text-transparent bg-clip-text bg-primary-gradient">
+                            <h2 className="text-4xl md:text-6xl font-bold text-primary-gradient">
                                 Dive into a World of Wonder!
                             </h2>
                             <p className="text-xl">
@@ -34,7 +34,7 @@ export default async function Home() {
                             </a>
                         </div>
                         <div className="h-max group-data-[theme=developer]/theme:opacity-100 opacity-0 transition-opacity duration-300 absolute inset-0 grid gap-6">
-                            <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r text-transparent bg-clip-text bg-primary-gradient">
+                            <h2 className="text-4xl md:text-6xl font-bold text-primary-gradient">
                                 Your Vision, Our Mission!
                             </h2>
                             <p className="text-xl">

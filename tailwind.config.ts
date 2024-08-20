@@ -39,12 +39,6 @@ module.exports = {
                     ".border-primary-light": {
                         "border-color": "var(--primary-color-light)",
                     },
-                    ".text-primary-gradient": {
-                        "background-image":
-                            "linear-gradient(to right, var(--primary-color), var(--primary-color-light))",
-                        "background-clip": "text",
-                        color: "transparent",
-                    },
                     ".fill-primary": {
                         fill: "url(#player-gradient) var(--primary-color)",
                     },
@@ -82,12 +76,6 @@ module.exports = {
                     },
                     ".border-primary-light": {
                         "border-color": "var(--primary-color-light)",
-                    },
-                    ".text-primary-gradient": {
-                        "background-image":
-                            "linear-gradient(to right, var(--primary-color), var(--primary-color-light))",
-                        "background-clip": "text",
-                        color: "transparent",
                     },
                     ".fill-primary": {
                         fill: "url(#player-gradient) #5145CD",

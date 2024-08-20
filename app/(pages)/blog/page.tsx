@@ -1,6 +1,13 @@
 import BlogCard from "@/app/_components/blog/BlogCard";
 import FeaturedBlog from "@/app/_components/blog/FeaturedBlog";
 import BodyContainer from "@/app/_components/BodyContainer";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Read All The Blogs. - DAQEM Studios",
+    description:
+        "DAQEM Studios offers a variety of engaging articles, tutorials, and project updates. Stay updated with our latest blog posts.",
+};
 
 export default function Page() {
     return (
@@ -36,9 +43,9 @@ export default function Page() {
                     slug="test"
                 />
             </div>
-            <div className="flex justify-between mt-24">
+            <div className="flex flex-wrap lg:gap-0 gap-4 justify-between mt-24">
                 <select
-                    className="select select-bordered w-full max-w-xs border-2"
+                    className="select select-bordered w-full lg:max-w-xs border-2"
                     defaultValue={"Category"}
                 >
                     <option disabled>Category</option>
@@ -48,10 +55,10 @@ export default function Page() {
                 <input
                     type="text"
                     placeholder="Search"
-                    className="input input-bordered w-full max-w-xs border-2"
+                    className="input input-bordered w-full lg:max-w-xs border-2"
                 />
             </div>
-            <div className="mt-12 grid lg:grid-cols-3 gap-x-6 gap-y-12 box-border">
+            <div className="my-12 grid lg:grid-cols-3 gap-x-6 gap-y-12 box-border">
                 {(new Array(60).fill(0) as number[]).map((_, i) => (
                     <BlogCard
                         key={i}
