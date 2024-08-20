@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --selected-text-color: #f8f8f2;
+    --animation-btn: 0.5s;
+}
+
+span {
+    color: var(--selected-text-color);
+}
+
+.btn {
+    border-radius: 9999px;
+}
+
+[data-theme="player"] .theme-based-fill {
+    fill: url(#player-gradient);
+}
+
+[data-theme="developer"] .theme-based-fill {
+    fill: url(#developer-gradient);
+}
