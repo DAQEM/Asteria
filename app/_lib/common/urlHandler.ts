@@ -1,10 +1,14 @@
 class URLHandler {
-    static getBaseURL() {
-        return process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    static getAsteriaURL() {
+        return process.env.NEXT_PUBLIC_ASTERIA_URL || "http://localhost:3000";
+    }
+
+    static getHestiaURL() {
+        return process.env.NEXT_PUBLIC_HESTIA_URL || "http://localhost:5000";
     }
 
     static getBaseApiURL() {
-        return this.getBaseURL() + "/api";
+        return this.getHestiaURL() + "/api";
     }
 
     static getBaseAuthApiURL() {

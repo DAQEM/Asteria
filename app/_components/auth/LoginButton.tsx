@@ -14,7 +14,7 @@ const LoginButton = ({
         <a
             href={URLHandler.getLoginURL(
                 provider,
-                URLHandler.getBaseURL() + usePathname()
+                URLHandler.getAsteriaURL() + usePathname()
             )}
             className="btn btn-primary text-base"
         >
