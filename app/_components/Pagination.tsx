@@ -1,15 +1,9 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 
-const Pagination = ({
-    page,
-    maxPage
-}: {
-    page: number;
-    maxPage: number;
-}) => {
+const Pagination = ({ page, maxPage }: { page: number; maxPage: number }) => {
     const searchParams = useSearchParams();
     const pathname = usePathname();
 
@@ -34,17 +28,22 @@ const Pagination = ({
             >
                 <FaAngleDoubleLeft className="size-4" />
             </a>
-            <details className="dropdown join-item w-full btn p-0 light-border border-x-0 hover:border-primary hover:!border-2 hover:z-10">
-                <summary className="btn bg-transparent hover:bg-transparent border-0 w-full">
+            <details className="dropdown join-item w-full btn p-0 border-0">
+                <summary className="btn bg-transparent hover:bg-transparent w-full !rounded-none light-border border-x-0 hover:border-primary hover:!border-2 hover:z-10">
                     Page {page}
                 </summary>
                 <ul className="-left-12 mt-2 light-border dropdown-content bg-base-200 rounded-box z-50 w-64 p-2 shadow grid grid-cols-5 gap-2">
                     {Array.from({ length: maxPage }, (_, i) => (
                         <li
                             key={i}
-                            className="aspect-square bg-base-300 rounded-box flex justify-center items-center"
+                            className="aspect-square bg-base-300 rounded-box hover:bg-primary"
                         >
-                            <a href={urlCreator(i + 1)}>{i + 1}</a>
+                            <a
+                                className="size-full flex justify-center items-center"
+                                href={urlCreator(i + 1)}
+                            >
+                                {i + 1}
+                            </a>
                         </li>
                     ))}
                 </ul>
