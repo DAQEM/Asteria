@@ -16,7 +16,7 @@ export default async function Home() {
                         <HomeThemeSwitch />
                     </div>
                     <div className="relative h-[36rem]">
-                        <div className="h-max group-data-[theme=developer]/theme:opacity-0 opacity-100 transition-opacity duration-300 absolute inset-0 grid gap-6">
+                        <div className="h-max group-data-[theme=developer]/theme:opacity-0 opacity-100 transition-opacity duration-300 absolute inset-0 grid grid-rows-[max-content,max-content,max-content] gap-6">
                             <h2 className="text-4xl md:text-6xl font-bold text-primary-gradient">
                                 Dive into a World of Wonder!
                             </h2>
@@ -33,7 +33,7 @@ export default async function Home() {
                                 Explore Projects
                             </a>
                         </div>
-                        <div className="h-max group-data-[theme=developer]/theme:opacity-100 opacity-0 transition-opacity duration-300 absolute inset-0 grid gap-6">
+                        <div className="h-max group-data-[theme=developer]/theme:opacity-100 opacity-0 transition-opacity duration-300 absolute inset-0 grid grid-rows-[max-content,max-content,max-content] gap-6">
                             <h2 className="text-4xl md:text-6xl font-bold text-primary-gradient">
                                 Your Vision, Our Mission!
                             </h2>

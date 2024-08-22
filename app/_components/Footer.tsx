@@ -9,20 +9,20 @@ const Footer = () => {
             <footer className="footer bg-base-200 text-base-content p-10">
                 <nav>
                     <h6 className="footer-title">Services</h6>
-                    <a className="link link-hover">Projects</a>
-                    <a className="link link-hover">Blog</a>
-                    <a className="link link-hover">Server List</a>
+                    <a href="/projects" className="link link-hover">Projects</a>
+                    <a href="/blog" className="link link-hover">Blog</a>
+                    <a href="/servers" className="link link-hover">Server List</a>
                 </nav>
                 <nav>
                     <h6 className="footer-title">DAQEM Studios</h6>
-                    <a className="link link-hover">About us</a>
-                    <a className="link link-hover">Contact</a>
+                    <a href="/about" className="link link-hover">About us</a>
+                    <a href="/contact" className="link link-hover">Contact</a>
                 </nav>
                 <nav>
                     <h6 className="footer-title">Legal</h6>
-                    <a className="link link-hover">Terms of use</a>
-                    <a className="link link-hover">Privacy policy</a>
-                    <a className="link link-hover">Cookie policy</a>
+                    <a href="/legal/terms" className="link link-hover">Terms of use</a>
+                    <a href="/legal/privacy" className="link link-hover">Privacy policy</a>
+                    <a href="/legal/cookie" className="link link-hover">Cookie policy</a>
                 </nav>
             </footer>
             <DiscountBanner showIcons={true} r="WebsiteFooter" />
