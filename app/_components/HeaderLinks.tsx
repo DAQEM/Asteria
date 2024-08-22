@@ -5,7 +5,8 @@ import { headers } from "next/headers";
 const HeaderLinks = () => {
     const headersList = headers();
     const url = headersList.get("x-pathname") || "";
-    const url_selected_class = "text-white font-medium";
+    const url_selected_class =
+        "text-white font-medium bg-primary-gradient rounded-full";
 
     return (
         <>

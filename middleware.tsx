@@ -4,13 +4,15 @@ import AuthAPI from "./app/_lib/common/api/authAPI";
 const accessTokenCookieName = "hestia-auth-token";
 
 export async function middleware(request: NextRequest) {
-    if (request.nextUrl.pathname.startsWith("/logout")) {
+    const { pathname } = request.nextUrl;
+
+    if (pathname.startsWith("/logout")) {
         return handleLogout(request);
     }
 
     // Store current request url in a custom header, which you can read later
     const requestHeaders = request.headers;
-    requestHeaders.set("x-pathname", request.nextUrl.pathname);
+    requestHeaders.set("x-pathname", pathname);
 
     const cookies = request.cookies;
     const access_token = cookies.get(accessTokenCookieName)?.value;
@@ -21,7 +23,6 @@ export async function middleware(request: NextRequest) {
         } else {
             const user = await response.json();
             requestHeaders.set("x-user", JSON.stringify(user));
-            console.log("User authenticated", user);
         }
     }
 
@@ -42,6 +43,8 @@ export const config = {
 function handleLogout(request: NextRequest): NextResponse {
     // Redirect to the home page without the accessToken cookie
     const response = NextResponse.redirect(new URL("/", request.url));
-    response.cookies.delete(accessTokenCookieName);
+    response.cookies.set(accessTokenCookieName, "", {
+        maxAge: 0,
+    });
     return response;
 }

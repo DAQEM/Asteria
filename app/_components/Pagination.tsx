@@ -9,13 +9,17 @@ const Pagination = ({
     maxPage: number;
     urlCreator: (page: number) => string;
 }) => {
+    if (maxPage <= 1) return null;
+
     return (
         <div className="join grid grid-cols-[3rem,1fr,3rem] max-w-64 w-full rounded-full">
             <a
                 href={urlCreator(page - 1)}
                 className={
                     "join-item w-12 btn light-border hover:border-primary hover:!border-2 hover:z-10 " +
-                    (page === 1 ? "disabled" : "")
+                    (page === 1
+                        ? "btn-disabled !border-2 !border-base-content !border-opacity-20"
+                        : "")
                 }
             >
                 <FaAngleDoubleLeft className="size-4" />
@@ -39,7 +43,9 @@ const Pagination = ({
                 href={urlCreator(page + 1)}
                 className={
                     "join-item w-12 btn light-border hover:border-primary hover:!border-2 hover:z-10 " +
-                    (page === maxPage ? "disabled" : "")
+                    (page === maxPage
+                        ? "btn-disabled !border-2 !border-base-content !border-opacity-20"
+                        : "")
                 }
             >
                 <FaAngleDoubleRight className="size-4" />

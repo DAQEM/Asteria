@@ -13,8 +13,12 @@ const FeaturedBlog = ({
 }) => {
     return (
         <div className="flex flex-wrap justify-between p-20 bg-base-200 rounded-3xl border-2 border-base-300">
-            <figure className="max-w-md rounded-2xl overflow-hidden">
-                <img src={image} alt={title} />
+            <figure className="max-w-md rounded-2xl overflow-hidden h-full">
+                <img
+                    src={image}
+                    alt={title}
+                    className="w-full h-full object-contain"
+                />
             </figure>
             <div>
                 <a href={"/blog/" + slug}>

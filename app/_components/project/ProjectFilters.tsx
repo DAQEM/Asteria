@@ -1,7 +1,7 @@
 "use client";
 
 import { MdCategory, MdFrontLoader, MdTypeSpecimen } from "react-icons/md";
-import ProjectFilterCheckbox from "./ProjectFilterCheckbox";
+import Filters from "../Filters";
 
 const ProjectFilters = () => {
     function clearFilters() {
@@ -11,6 +11,7 @@ const ProjectFilters = () => {
 
         checkboxes.forEach((checkbox) => {
             checkbox.checked = false;
+            checkbox.dispatchEvent(new Event("change"));
         });
     }
 
@@ -23,30 +24,85 @@ const ProjectFilters = () => {
                 <span className="flex items-center gap-2">
                     <MdTypeSpecimen /> Types
                 </span>
-                <ProjectFilterCheckbox>Mod</ProjectFilterCheckbox>
-                <ProjectFilterCheckbox>Modpack</ProjectFilterCheckbox>
-                <ProjectFilterCheckbox>Plugin</ProjectFilterCheckbox>
+                <Filters
+                    searchParam="types"
+                    options={[
+                        {
+                            value: "mod",
+                            label: "Mod",
+                        },
+                        {
+                            value: "modpack",
+                            label: "Modpack",
+                        },
+                        {
+                            value: "plugin",
+                            label: "Plugin",
+                        },
+                    ]}
+                />
             </div>
             <div>
                 <span className="flex items-center gap-2">
                     <MdFrontLoader />
                     Loaders
                 </span>
-                <ProjectFilterCheckbox>Forge</ProjectFilterCheckbox>
-                <ProjectFilterCheckbox>Fabric</ProjectFilterCheckbox>
-                <ProjectFilterCheckbox>Spigot</ProjectFilterCheckbox>
+                <Filters
+                    searchParam="loaders"
+                    options={[
+                        {
+                            value: "forge",
+                            label: "Forge",
+                        },
+                        {
+                            value: "fabric",
+                            label: "Fabric",
+                        },
+                        {
+                            value: "neoforge",
+                            label: "NeoForge",
+                        },
+                        {
+                            value: "quilt",
+                            label: "Quilt",
+                        },
+                    ]}
+                />
             </div>
             <div>
                 <span className="flex items-center gap-2">
                     <MdCategory />
                     Categories
                 </span>
-                <ProjectFilterCheckbox>Adventure</ProjectFilterCheckbox>
-                <ProjectFilterCheckbox>Survival</ProjectFilterCheckbox>
-                <ProjectFilterCheckbox>Mini-Game</ProjectFilterCheckbox>
-                <ProjectFilterCheckbox>Utility</ProjectFilterCheckbox>
-                <ProjectFilterCheckbox>Roleplay</ProjectFilterCheckbox>
-                <ProjectFilterCheckbox>Other</ProjectFilterCheckbox>
+                <Filters
+                    searchParam="categories"
+                    options={[
+                        {
+                            value: "adventure",
+                            label: "Adventure",
+                        },
+                        {
+                            value: "survival",
+                            label: "Survival",
+                        },
+                        {
+                            value: "mini-game",
+                            label: "Mini-Game",
+                        },
+                        {
+                            value: "utility",
+                            label: "Utility",
+                        },
+                        {
+                            value: "roleplay",
+                            label: "Roleplay",
+                        },
+                        {
+                            value: "other",
+                            label: "Other",
+                        },
+                    ]}
+                />
             </div>
         </div>
     );
