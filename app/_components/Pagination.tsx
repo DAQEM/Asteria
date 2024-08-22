@@ -1,14 +1,24 @@
+"use client";
+
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 
 const Pagination = ({
     page,
-    maxPage,
-    urlCreator,
+    maxPage
 }: {
     page: number;
     maxPage: number;
-    urlCreator: (page: number) => string;
 }) => {
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+
+    const urlCreator = (page: number) => {
+        const params = new URLSearchParams(searchParams);
+        params.set("page", page.toString());
+        return `${pathname}?${params.toString()}`;
+    };
+
     if (maxPage <= 1) return null;
 
     return (

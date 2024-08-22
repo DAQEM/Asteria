@@ -158,9 +158,6 @@ export default async function Page({
                         <Pagination
                             page={projects.page}
                             maxPage={projects.total_pages}
-                            urlCreator={(page: number): string =>
-                                `/projects/page/${page}`
-                            }
                         />
                     </div>
                     <div
@@ -183,9 +180,6 @@ export default async function Page({
                         <Pagination
                             page={projects.page}
                             maxPage={projects.total_pages}
-                            urlCreator={(page: number): string =>
-                                `/projects/page/${page}`
-                            }
                         />
                     </div>
                 </section>
