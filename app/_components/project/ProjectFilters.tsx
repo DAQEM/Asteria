@@ -1,9 +1,14 @@
 "use client";
 
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { MdCategory, MdFrontLoader, MdTypeSpecimen } from "react-icons/md";
 import Filters from "../Filters";
 
-const ProjectFilters = () => {
+const ProjectFilters = ({ categories }: { categories: Category[] }) => {
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const { replace } = useRouter();
+
     function clearFilters() {
         const checkboxes: HTMLInputElement[] = document.querySelectorAll(
             "#project-filters input[type=checkbox]"
@@ -11,8 +16,13 @@ const ProjectFilters = () => {
 
         checkboxes.forEach((checkbox) => {
             checkbox.checked = false;
-            checkbox.dispatchEvent(new Event("change"));
         });
+
+        const params = new URLSearchParams(searchParams);
+        params.delete("types");
+        params.delete("loaders");
+        params.delete("categories");
+        replace(`${pathname}?${params.toString()}`);
     }
 
     return (
@@ -76,32 +86,10 @@ const ProjectFilters = () => {
                 </span>
                 <Filters
                     searchParam="categories"
-                    options={[
-                        {
-                            value: "adventure",
-                            label: "Adventure",
-                        },
-                        {
-                            value: "survival",
-                            label: "Survival",
-                        },
-                        {
-                            value: "mini-game",
-                            label: "Mini-Game",
-                        },
-                        {
-                            value: "utility",
-                            label: "Utility",
-                        },
-                        {
-                            value: "roleplay",
-                            label: "Roleplay",
-                        },
-                        {
-                            value: "other",
-                            label: "Other",
-                        },
-                    ]}
+                    options={categories.map((category) => ({
+                        value: category.slug,
+                        label: category.name,
+                    }))}
                 />
             </div>
         </div>

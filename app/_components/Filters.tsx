@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
+import Iconed from "./icon/Iconed";
 
 const Filters = ({
     searchParam,
@@ -47,7 +48,7 @@ const Filters = ({
                                 .includes(option.value)}
                             onChange={(e) => handleFilter()}
                         />
-                        {option.label}
+                        <Iconed text={option.label} size={4} />
                     </label>
                 </div>
             ))}

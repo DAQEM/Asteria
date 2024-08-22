@@ -64,6 +64,19 @@ class ProjectsApi {
         }
         return await response.json();
     }
+
+    async getAllCategories(): Promise<Category[]> {
+        const url = this.getApiUrl() + "category";
+        const response = await fetch(url, {
+            next: {
+                revalidate: 60 * 60,
+            },
+        });
+        if (!response.ok) {
+            return [];
+        }
+        return await response.json();
+    }
 }
 
 export default ProjectsApi;

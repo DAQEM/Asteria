@@ -44,16 +44,19 @@ export default async function Page({
             ? [searchParams.categories]
             : searchParams?.categories || [];
 
-    console.log("Query:", query);
-    console.log("Order:", order);
-    console.log("Page:", page);
-    console.log("PageSize:", pageSize);
-    console.log("Types:", types);
-    console.log("Loaders:", loaders);
-    console.log("Categories:", categories);
-
     const projectsApi = new ProjectsApi();
-    const projects = await projectsApi.getAll(page, pageSize, types, loaders, categories, order, query);
+    const [projects, allCategories] = await Promise.all([
+        projectsApi.getAll(
+            page,
+            pageSize,
+            types,
+            loaders,
+            categories,
+            order,
+            query
+        ),
+        projectsApi.getAllCategories(),
+    ]);
 
     return (
         <BodyContainer>
@@ -73,7 +76,7 @@ export default async function Page({
                     id="sidebar"
                     className="row-start-2 lg:col-start-1 lg:row-start-1 simple-card h-max group-has-[#filter-toggle:checked]/projects:hidden lg:!block"
                 >
-                    <ProjectFilters />
+                    <ProjectFilters categories={allCategories} />
                 </aside>
                 <section className="contents lg:flex lg:flex-col lg:gap-4">
                     <div id="controls" className="row-start-1 lg:col-start-2">
@@ -165,12 +168,18 @@ export default async function Page({
                         className="row-start-4 group-has-[#filter-toggle:checked]/projects:row-start-3 lg:col-start-2 lg:row-start-3"
                     >
                         <div className="grid gap-4">
-                            {projects.data.map((project) => (
-                                <ProjectCard
-                                    key={project.id}
-                                    project={project}
-                                />
-                            ))}
+                            {projects.data.length > 0 ? (
+                                projects.data.map((project) => (
+                                    <ProjectCard
+                                        key={project.id}
+                                        project={project}
+                                    />
+                                ))
+                            ) : (
+                                <div className="w-full text-center">
+                                    No projects found.
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div

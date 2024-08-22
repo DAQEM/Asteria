@@ -52,3 +52,11 @@ type Project = {
     loaders: string[];
     users: User[];
 }
+
+type Category = {
+    id: number;
+    name: string;
+    slug: string;
+    meta_title: string;
+    content: string;
+}
