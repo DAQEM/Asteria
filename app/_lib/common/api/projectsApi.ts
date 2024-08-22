@@ -48,7 +48,11 @@ class ProjectsApi {
             url += "?" + searchParams.toString();
         }
 
-        const response = await fetch(url);
+        const response = await fetch(url, {
+            next: {
+                revalidate: 60,
+            },
+        });
         if (!response.ok) {
             return {
                 data: [],
