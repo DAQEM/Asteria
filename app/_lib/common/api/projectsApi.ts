@@ -49,8 +49,9 @@ class ProjectsApi {
         }
 
         const response = await fetch(url, {
+            cache: "no-cache",
             next: {
-                revalidate: 60,
+                revalidate: 60
             },
         });
         if (!response.ok) {

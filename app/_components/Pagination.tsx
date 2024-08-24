@@ -13,7 +13,9 @@ const Pagination = ({ page, maxPage }: { page: number; maxPage: number }) => {
         return `${pathname}?${params.toString()}`;
     };
 
-    if (maxPage <= 1) return null;
+    if (maxPage <= 1 && page === 1) {
+        return null;
+    }
 
     return (
         <div className="join grid grid-cols-[3rem,1fr,3rem] max-w-64 w-full rounded-full">
