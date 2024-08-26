@@ -50,9 +50,6 @@ class ProjectsApi {
 
         const response = await fetch(url, {
             cache: "no-cache",
-            next: {
-                revalidate: 60
-            },
         });
         if (!response.ok) {
             return {
@@ -75,6 +72,29 @@ class ProjectsApi {
         });
         if (!response.ok) {
             return [];
+        }
+        return await response.json();
+    }
+
+    // Works with both id and slug
+    async getProject(
+        id: string,
+        categories?: boolean,
+        users?: boolean
+    ): Promise<Project | null> {
+        const url =
+            this.getApiUrl() +
+            "/" +
+            id +
+            "?categories=" +
+            (categories || false) +
+            "&users=" +
+            (users || false);
+        const response = await fetch(url, {
+            cache: "no-cache",
+        });
+        if (!response.ok) {
+            return null;
         }
         return await response.json();
     }

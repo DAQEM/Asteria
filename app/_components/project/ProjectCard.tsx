@@ -2,11 +2,24 @@ import Image from "next/image";
 import { FaDownload } from "react-icons/fa6";
 import Iconed from "../icon/Iconed";
 
-const ProjectCard = ({ project }: { project: Project }) => {
+const ProjectCard = ({
+    project,
+    className,
+    TitleClassName,
+}: {
+    project: Project;
+    className?: string;
+    TitleClassName?: string;
+}) => {
     const url = `/projects/${project.slug}`;
 
     return (
-        <div className="simple-card grid grid-cols-[min-content,1fr] grid-rows-[max-content,1fr,max-content,max-content] lg:grid-cols-[max-content,1fr,max-content] lg:grid-rows-[max-content,1fr,max-content] gap-x-3 gap-y-2">
+        <div
+            className={
+                "simple-card grid grid-cols-[min-content,1fr] grid-rows-[max-content,1fr,max-content,max-content] lg:grid-cols-[max-content,1fr,max-content] lg:grid-rows-[max-content,1fr,max-content] gap-x-3 gap-y-2 " +
+                className
+            }
+        >
             <div className="lg:row-start-1 lg:col-start-1 row-start-1 col-start-1 lg:size-32 size-24 rounded-md overflow-hidden row-span-2 lg:row-span-3">
                 <a href={url}>
                     <img src={project.image_url} alt={project.name} />
@@ -14,7 +27,12 @@ const ProjectCard = ({ project }: { project: Project }) => {
             </div>
             <div className="lg:row-start-1 lg:col-start-2 row-start-1 col-start-2 flex gap-2 items-center">
                 <a href={url}>
-                    <span className="text-xl font-semibold hover:underline underline-offset-2">
+                    <span
+                        className={
+                            "text-xl font-semibold hover:underline underline-offset-2 " +
+                            TitleClassName
+                        }
+                    >
                         <h2>{project.name}</h2>
                     </span>
                 </a>
@@ -71,12 +89,17 @@ const ProjectCard = ({ project }: { project: Project }) => {
                     {project.users.map((user) => (
                         <div
                             key={user.id}
-                            className="tooltip"
+                            className="tooltip lg:tooltip-top tooltip-left"
                             data-tip={user.name}
                         >
                             <div className="avatar border-base-200">
                                 <a className="w-6" href={`/users/${user.name}`}>
-                                    <img src={user.image} alt={user.name} />
+                                    <Image
+                                        src={user.image}
+                                        alt={user.name}
+                                        height={24}
+                                        width={24}
+                                    />
                                 </a>
                             </div>
                         </div>
@@ -140,12 +163,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
                     </div>
                     <div className="contents lg:hidden">
                         {project.curse_forge_url && (
-                            <a
-                                href={project.curse_forge_url}
-                                target="_blank"
-                                className="tooltip"
-                                data-tip="Visit CurseForge Page"
-                            >
+                            <a href={project.curse_forge_url} target="_blank">
                                 <Image
                                     className="h-8 w-max"
                                     src="/images/devins-badges-3/cozy/available/curseforge_vector.svg"
@@ -156,12 +174,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
                             </a>
                         )}
                         {project.modrinth_url && (
-                            <a
-                                href={project.modrinth_url}
-                                target="_blank"
-                                className="tooltip"
-                                data-tip="Visit Modrinth Page"
-                            >
+                            <a href={project.modrinth_url} target="_blank">
                                 <Image
                                     className="h-8 w-max"
                                     src="/images/devins-badges-3/cozy/available/modrinth_vector.svg"
