@@ -1,8 +1,8 @@
-import URLHandler from "../urlHandler";
+import BaseApi from "./baseApi";
 
-class ProjectsApi {
-    getApiUrl() {
-        return URLHandler.getBaseApiURL() + "/v1/project";
+class ProjectsApi extends BaseApi {
+    constructor() {
+        super("/v1/project");
     }
 
     async getAll(
@@ -95,6 +95,23 @@ class ProjectsApi {
         });
         if (!response.ok) {
             return null;
+        }
+        return await response.json();
+    }
+
+    async getProjectsByUser(username: string): Promise<PagedResponse<Project>> {
+        const url = this.getApiUrl() + "?user=" + username;
+        const response = await fetch(url, {
+            cache: "no-cache",
+        });
+        if (!response.ok) {
+            return {
+                data: [],
+                page: 0,
+                page_size: 0,
+                total_count: 0,
+                total_pages: 0,
+            };
         }
         return await response.json();
     }

@@ -16,8 +16,6 @@ const Filters = ({
     const { replace } = useRouter();
 
     const handleFilter = useDebouncedCallback(() => {
-        console.log("Filtering:", searchParam);
-
         const params = new URLSearchParams(searchParams);
         const parent = document.getElementById(searchParam);
         const checkboxes: HTMLInputElement[] =

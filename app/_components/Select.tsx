@@ -17,8 +17,6 @@ const Select = ({
     const { replace } = useRouter();
 
     const handleSelect = useDebouncedCallback((term) => {
-        console.log("Selecting:", term);
-
         const params = new URLSearchParams(searchParams);
         if (term) {
             params.set(searchParam, term);

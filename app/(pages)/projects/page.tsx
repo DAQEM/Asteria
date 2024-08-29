@@ -70,7 +70,7 @@ export default async function Page({
             </div>
             <div
                 id="projects"
-                className="group/projects my-12 grid lg:grid-cols-[20rem,1fr] gap-4"
+                className="group/projects mt-12 grid lg:grid-cols-[20rem,1fr] gap-4"
             >
                 <aside
                     id="sidebar"
@@ -192,7 +192,6 @@ export default async function Page({
                         />
                     </div>
                 </section>
-                <div></div>
             </div>
         </BodyContainer>
     );

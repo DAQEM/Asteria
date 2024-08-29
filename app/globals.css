@@ -4,7 +4,7 @@
 
 :root {
     --selected-text-color: #f8f8f2;
-    --animation-btn: 0.5s;
+    --animation-btn: 0s;
 }
 
 span {

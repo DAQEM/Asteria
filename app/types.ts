@@ -21,9 +21,9 @@ type User = {
     joined: number;
     last_active: number;
     accounts: Account[] | null;
-}
+};
 
-type Account = {}
+type Account = {};
 
 type PagedResponse<T> = {
     data: T[];
@@ -57,7 +57,7 @@ type Project = {
     categories: string[];
     loaders: string[];
     users: User[];
-}
+};
 
 type Category = {
     id: number;
@@ -65,4 +65,23 @@ type Category = {
     slug: string;
     meta_title: string;
     content: string;
-}
+};
+
+type FormProps = {
+    children: any;
+    action: (currentState: FormState, formData: FormData) => Promise<any>;
+    className?: string;
+    submitText?: string;
+    submitButton: boolean;
+};
+
+type FormState = {
+    errors?: Errors;
+    success?: boolean;
+    message?: string;
+};
+
+type ServerAction = (
+    currentState: FormState,
+    formData: FormData
+) => Promise<any>;

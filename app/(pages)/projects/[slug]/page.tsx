@@ -162,7 +162,7 @@ export default async function Page({
                                 {project.users.map((author) => (
                                     <a
                                         key={author.id}
-                                        href={`/authors/${author.id}`}
+                                        href={`/users/${author.name}`}
                                         className="flex items-center hover:underline underline-offset-2 mt-2"
                                     >
                                         <Image
@@ -207,7 +207,7 @@ export default async function Page({
                         </div>
                     </div>
                     <div className="simple-card">
-                        <span className="text-lg font-semibold">Details</span>
+                        <span className="text-lg font-semibold">Info</span>
                         <div className="font-medium">
                             <div className="mt-2 flex gap-2">
                                 <p className="font-semibold">Type:</p>

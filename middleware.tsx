@@ -7,7 +7,7 @@ export async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
     if (pathname.startsWith("/logout")) {
-        return handleLogout(request);
+        return NextResponse.next();
     }
 
     // Store current request url in a custom header, which you can read later
@@ -17,12 +17,12 @@ export async function middleware(request: NextRequest) {
     const cookies = request.cookies;
     const access_token = cookies.get(accessTokenCookieName)?.value;
     if (access_token) {
-        const response = await new AuthAPI().authenticate(access_token);
-        if (!response.ok) {
-            cookies.delete(accessTokenCookieName);
+        const response = await new AuthAPI().authenticate();
+        
+        if (response.success) {
+            requestHeaders.set("x-user", JSON.stringify(response.data));
         } else {
-            const user = await response.json();
-            requestHeaders.set("x-user", JSON.stringify(user));
+            cookies.delete(accessTokenCookieName);
         }
     }
 

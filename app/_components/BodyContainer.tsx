@@ -7,6 +7,7 @@ const BodyContainer = ({
     type?: "default" | "full" | "narrow" | "wide";
     className?: string;
 }) => {
+    className = className || "";
     className += " mx-auto px-2 ";
     switch (type) {
         case undefined && "default":

@@ -1,5 +1,6 @@
 import { headers } from "next/headers";
 import Image from "next/image";
+import { FaCog } from "react-icons/fa";
 import { FaArrowRightToBracket, FaDiscord, FaUser } from "react-icons/fa6";
 import DiscountBanner from "./DiscountBanner";
 import HeaderLinks from "./HeaderLinks";
@@ -16,7 +17,7 @@ const Header = () => {
     return (
         <header className="grid grid-rows-[max-content,5rem] bg-base-100">
             <DiscountBanner r="WebsiteHeader" />
-            <nav className="navbar max-w-8xl mx-auto px-4 py-0">
+            <nav className="navbar max-w-7xl mx-auto px-4 py-0">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div
@@ -41,7 +42,7 @@ const Header = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow gap-2"
                         >
                             <HeaderLinks />
                         </ul>
@@ -67,7 +68,7 @@ const Header = () => {
                     </a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
+                    <ul className="menu menu-horizontal px-1 gap-2">
                         <HeaderLinks />
                     </ul>
                 </div>
@@ -105,6 +106,12 @@ const Header = () => {
                                     <a href={"/users/" + user.name}>
                                         <FaUser className="size-4" />
                                         View Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/settings/profile">
+                                        <FaCog className="size-4" />
+                                        Settings
                                     </a>
                                 </li>
                                 <li>

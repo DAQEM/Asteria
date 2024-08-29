@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
     return (
-        <BodyContainer type="narrow">
+        <BodyContainer>
             <div className="mt-6 breadcrumbs text-sm">
                 <ul>
                     <li>
