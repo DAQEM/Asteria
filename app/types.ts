@@ -17,7 +17,7 @@ type User = {
     bio?: string;
     email: string;
     image: string;
-    role: string;
+    roles: string[];
     joined: number;
     last_active: number;
     accounts: Account[] | null;
@@ -67,13 +67,7 @@ type Category = {
     content: string;
 };
 
-type FormProps = {
-    children: any;
-    action: (currentState: FormState, formData: FormData) => Promise<any>;
-    className?: string;
-    submitText?: string;
-    submitButton: boolean;
-};
+
 
 type FormState = {
     errors?: Errors;
@@ -85,3 +79,21 @@ type ServerAction = (
     currentState: FormState,
     formData: FormData
 ) => Promise<any>;
+
+type RefreshTokenResponse = {
+    token: string;
+    expires_at: Date;
+};
+
+type SessionResponse = {
+    id: number;
+    created_at: Date;
+    last_used_at: Date;
+    expires_at: Date;
+    ip_address: string;
+    operating_system: string;
+    browser: string;
+    country: string;
+    city: string;
+    is_current_session: boolean;
+};

@@ -1,10 +1,10 @@
 import updateUserInfoAction from "@/app/_actions/user/updateUserInfoAction";
 import UserProfileSettingForm from "@/app/_components/user/UserProfileSettingForm";
-import AuthAPI from "@/app/_lib/common/api/authAPI";
+import UsersApi from "@/app/_lib/common/api/usersApi";
 import { redirect } from "next/navigation";
 
 export default async function Page() {
-    const authResponse = await new AuthAPI().authenticate();
+    const authResponse = await new UsersApi().me();
 
     if (!authResponse.success) redirect("/settings");
 

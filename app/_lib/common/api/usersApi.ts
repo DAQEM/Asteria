@@ -2,7 +2,16 @@ import BaseApi from "./baseApi";
 
 class UsersApi extends BaseApi {
     constructor() {
-        super("/v1/user");
+        super("/v1/users");
+    }
+
+    async me(token?: string): Promise<ApiResponse<User>> {
+        const response = await fetch(this.getApiUrl() + "/me", {
+            headers: this.getAuthenticationHeader(token),
+            cache: "no-cache",
+        });
+
+        return this.handleApiResponse(response);
     }
 
     async getUser(username: string): Promise<User | null> {
@@ -15,24 +24,15 @@ class UsersApi extends BaseApi {
         return await response.json();
     }
 
-    async updateUser(name: string, bio: string): Promise<ApiResponse<User>> {
+    async updateUser(name: string, bio?: string): Promise<ApiResponse<User>> {
         const response = await fetch(this.getApiUrl(), {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: this.getAuthToken(),
+                ...this.getAuthenticationHeader(),
             },
             body: JSON.stringify({ name, bio }),
         });
-
-        const getSetCookies: string[] = response.headers.getSetCookie();
-
-        const token = this.getAuthTokenFromSetCookie(getSetCookies);
-
-        if (token) {
-            this.setAuthToken(token);
-        }
-
         return this.handleApiResponse(response);
     }
 }

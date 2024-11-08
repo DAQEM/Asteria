@@ -1,9 +1,10 @@
 import BodyContainer from "@/app/_components/BodyContainer";
-import Pagination from "@/app/_components/Pagination";
+import Pagination from "@/app/_components/input/Pagination";
+import Search from "@/app/_components/input/Search";
+import PageSizeSelect from "@/app/_components/nav/PageSizeSelect";
 import ProjectCard from "@/app/_components/project/ProjectCard";
 import ProjectFilters from "@/app/_components/project/ProjectFilters";
-import Search from "@/app/_components/Search";
-import Select from "@/app/_components/Select";
+import ProjectOrderSelect from "@/app/_components/project/ProjectOrderSelect";
 import ProjectsApi from "@/app/_lib/common/api/projectsApi";
 import { Metadata } from "next";
 import { FaFilter } from "react-icons/fa6";
@@ -60,7 +61,7 @@ export default async function Page({
 
     return (
         <BodyContainer>
-            <div className="mt-6 breadcrumbs text-sm">
+            <div className="breadcrumbs text-sm">
                 <ul>
                     <li>
                         <a href="/">Home</a>
@@ -70,7 +71,7 @@ export default async function Page({
             </div>
             <div
                 id="projects"
-                className="group/projects mt-12 grid lg:grid-cols-[20rem,1fr] gap-4"
+                className="group/projects mt-6 grid lg:grid-cols-[20rem,1fr] gap-4"
             >
                 <aside
                     id="sidebar"
@@ -97,81 +98,35 @@ export default async function Page({
                                 </div>
                                 <div className="flex gap-2 items-center">
                                     <div>Sort by</div>
-                                    <Select
-                                        searchParam="order"
-                                        defaultValue={order || "relevance"}
-                                        options={[
-                                            {
-                                                label: "Relevance",
-                                                value: "relevance",
-                                            },
-                                            {
-                                                label: "Name",
-                                                value: "name",
-                                            },
-                                            {
-                                                label: "Downloads",
-                                                value: "downloads",
-                                            },
-                                            {
-                                                label: "Creation Date",
-                                                value: "createdAt",
-                                            },
-                                        ]}
-                                    />
+                                    <ProjectOrderSelect order={order} />
                                 </div>
                                 <div className="flex gap-2 items-center">
                                     <div>Projects per page</div>
-                                    <Select
-                                        searchParam="pageSize"
-                                        defaultValue={
-                                            pageSize.toString() || "20"
-                                        }
-                                        options={[
-                                            {
-                                                label: "5",
-                                                value: "5",
-                                            },
-                                            {
-                                                label: "10",
-                                                value: "10",
-                                            },
-                                            {
-                                                label: "20",
-                                                value: "20",
-                                            },
-                                            {
-                                                label: "50",
-                                                value: "50",
-                                            },
-                                            {
-                                                label: "100",
-                                                value: "100",
-                                            },
-                                        ]}
-                                    />
+                                    <PageSizeSelect pageSize={pageSize} />
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div
-                        id="pagination-top"
-                        className="row-start-3 group-has-[#filter-toggle:checked]/projects:row-start-2 lg:col-start-2 lg:row-start-2 flex w-full justify-center"
-                    >
-                        <Pagination
-                            page={projects.page}
-                            maxPage={projects.total_pages}
-                        />
-                    </div>
+                    {projects.total_pages > 1 && (
+                        <div
+                            id="pagination-top"
+                            className="row-start-3 group-has-[#filter-toggle:checked]/projects:row-start-2 lg:col-start-2 lg:row-start-2 flex w-full justify-center"
+                        >
+                            <Pagination
+                                page={projects.page}
+                                maxPage={projects.total_pages}
+                            />
+                        </div>
+                    )}
                     <div
                         id="content"
                         className="row-start-4 group-has-[#filter-toggle:checked]/projects:row-start-3 lg:col-start-2 lg:row-start-3"
                     >
                         <div className="grid gap-4">
                             {projects.data.length > 0 ? (
-                                projects.data.map((project) => (
+                                projects.data.map((project, index) => (
                                     <ProjectCard
-                                        key={project.id}
+                                        key={index}
                                         project={project}
                                     />
                                 ))
@@ -182,15 +137,17 @@ export default async function Page({
                             )}
                         </div>
                     </div>
-                    <div
-                        id="pagination-bottom"
-                        className="row-start-5 group-has-[#filter-toggle:checked]/projects:row-start-4 lg:col-start-2 lg:row-start-4 flex w-full justify-center"
-                    >
-                        <Pagination
-                            page={projects.page}
-                            maxPage={projects.total_pages}
-                        />
-                    </div>
+                    {projects.total_pages > 1 && (
+                        <div
+                            id="pagination-bottom"
+                            className="row-start-5 group-has-[#filter-toggle:checked]/projects:row-start-4 lg:col-start-2 lg:row-start-4 flex w-full justify-center"
+                        >
+                            <Pagination
+                                page={projects.page}
+                                maxPage={projects.total_pages}
+                            />
+                        </div>
+                    )}
                 </section>
             </div>
         </BodyContainer>

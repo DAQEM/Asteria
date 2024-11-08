@@ -69,7 +69,7 @@ export default async function Page({
     }
 
     return (
-        <BodyContainer className="mt-6 lg:mt-12 px-4 lg:px-0">
+        <BodyContainer className="mt-6 lg:mt-12">
             <div className="grid lg:grid-cols-[1fr,20rem] gap-4 lg:gap-y-6">
                 <div className="lg:col-span-2">
                     <div className="grid grid-cols-[max-content,1fr] gap-4">
@@ -106,9 +106,9 @@ export default async function Page({
                     {(projectsTab || (!blogsTab && !serversTab)) &&
                         (projects ? (
                             projects.data.length > 0 ? (
-                                projects.data.map((project) => (
+                                projects.data.map((project, index) => (
                                     <ProjectCard
-                                        key={project.id}
+                                        key={index}
                                         project={project}
                                     />
                                 ))
@@ -123,8 +123,8 @@ export default async function Page({
                     {blogsTab &&
                         (blogs ? (
                             blogs.data.length > 0 ? (
-                                blogs.data.map((blog) => (
-                                    <div key={blog.id}>
+                                blogs.data.map((blog, index) => (
+                                    <div key={index}>
                                         <p>{blog.title}</p>
                                     </div>
                                 ))
@@ -137,8 +137,8 @@ export default async function Page({
                     {serversTab &&
                         (servers ? (
                             servers.data.length > 0 ? (
-                                servers.data.map((server) => (
-                                    <div key={server.id}>
+                                servers.data.map((server, index) => (
+                                    <div key={index}>
                                         <p>{server.name}</p>
                                     </div>
                                 ))
@@ -159,11 +159,11 @@ export default async function Page({
                                 <p className="font-semibold">Joined:</p>{" "}
                                 <p
                                     className="tooltip"
-                                    data-tip={moment(user.joined * 1000).format(
+                                    data-tip={moment(user.joined).format(
                                         "MMMM Do YYYY, h:mm:ss a"
                                     )}
                                 >
-                                    {moment(user.joined * 1000).fromNow()}
+                                    {moment(user.joined).fromNow()}
                                 </p>
                             </div>
                         </div>

@@ -20,9 +20,9 @@ module.exports = {
                 player: {
                     ...require("daisyui/src/theming/themes")["dark"],
                     "color-scheme": "dark",
-                    primary: "#0b4ad4",
-                    "--primary-color-light": "#2873fc",
-                    "--primary-color-dark": "#1E429F",
+                    primary: "#0073ff",
+                    "--primary-color-light": "#177fff",
+                    "--primary-color-dark": "#0062da",
                     "--primary-color": "oklch(var(--p))",
                     ".btn-primary": {
                         "background-image":

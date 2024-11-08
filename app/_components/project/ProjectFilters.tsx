@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { MdCategory, MdFrontLoader, MdTypeSpecimen } from "react-icons/md";
-import Filters from "../Filters";
+import Filters from "../input/Filters";
 
 const ProjectFilters = ({ categories }: { categories: Category[] }) => {
     const searchParams = useSearchParams();

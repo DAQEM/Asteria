@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
-import Iconed from "./icon/Iconed";
+import Iconed from "../icon/Iconed";
 
 const Filters = ({
     searchParam,
@@ -34,8 +34,8 @@ const Filters = ({
 
     return (
         <div id={searchParam}>
-            {options.map((option) => (
-                <div key={option.value} className="form-control">
+            {options.map((option, index) => (
+                <div key={index} className="form-control">
                     <label className="label cursor-pointer justify-start gap-2 py-1">
                         <input
                             type="checkbox"

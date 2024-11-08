@@ -97,7 +97,7 @@ const Iconed = ({
     };
 
     return (
-        <div className={"flex gap-2 items-center " + className}>
+        <div className={"flex gap-2 items-center capitalize " + className}>
             {getIcon()}
             {text}
         </div>

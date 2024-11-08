@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { FaCompass } from "react-icons/fa6";
 import BodyContainer from "../_components/BodyContainer";
-import HomeThemeSwitch from "../_components/HomeThemeSwitch";
+import HomeThemeSwitch from "../_components/input/HomeThemeSwitch";
 import HomeCornerSvg from "../_components/svg/HomeCornerSvg";
 
 export default async function Home() {
     return (
         <main>
-            <BodyContainer className="grid lg:grid-cols-2 grid-cols-1 lg:mt-24 mt-12">
+            <BodyContainer className="grid lg:grid-cols-2 grid-cols-1 lg:mt-16 mt-4">
                 <div className="max-w-xl">
                     <div className="mb-6 flex items-center gap-3 font-medium">
                         <p className="text-lg">

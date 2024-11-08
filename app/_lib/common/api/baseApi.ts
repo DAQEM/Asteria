@@ -13,7 +13,13 @@ abstract class BaseApi {
     }
 
     getAuthToken() {
-        return cookies().get("hestia-auth-token")?.value || "";
+        return cookies().get("auth-token")?.value || "";
+    }
+
+    getAuthenticationHeader(token?: string) {
+        return {
+            Authorization: "Bearer " + (token || this.getAuthToken()),
+        };
     }
 
     failedResponse<T>(response: Response): ApiResponse<T> {
@@ -54,24 +60,6 @@ abstract class BaseApi {
             statusCode: response.status,
             data: await response.json(),
         };
-    }
-
-    getAuthTokenFromSetCookie(setCookie: string[]): string | null {
-        for (const setCookieEntry of setCookie) {
-            const token = setCookieEntry
-                .split(";")
-                .map((cookie) => cookie.trim().split("="))
-                .find(([key]) => key === "hestia-auth-token");
-
-            if (token) {
-                return token[1];
-            }
-        }
-        return null;
-    }
-
-    setAuthToken(token: string) {
-        cookies().set("hestia-auth-token", token);
     }
 }
 

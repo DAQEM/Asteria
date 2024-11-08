@@ -1,6 +1,6 @@
 "use client";
 
-import ThemeController from "../_lib/client/themeController";
+import ThemeController from "../../_lib/client/themeController";
 
 const HomeThemeSwitch = () => {
     return (

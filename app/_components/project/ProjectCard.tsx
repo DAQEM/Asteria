@@ -20,9 +20,14 @@ const ProjectCard = ({
                 className
             }
         >
-            <div className="lg:row-start-1 lg:col-start-1 row-start-1 col-start-1 lg:size-32 size-24 rounded-md overflow-hidden row-span-2 lg:row-span-3">
+            <div className="lg:row-start-1 lg:col-start-1 row-start-1 col-start-1 size-24 rounded-md overflow-hidden row-span-2 lg:row-span-3">
                 <a href={url}>
-                    <img src={project.image_url} alt={project.name} />
+                    <Image
+                        src={project.image_url}
+                        alt={project.name}
+                        width={96}
+                        height={96}
+                    />
                 </a>
             </div>
             <div className="lg:row-start-1 lg:col-start-2 row-start-1 col-start-2 flex gap-2 items-center">
@@ -86,9 +91,9 @@ const ProjectCard = ({
             </div>
             <div className="lg:row-start-2 lg:col-start-3 row-start-4 col-start-2 flex justify-end">
                 <div className="avatar-group -space-x-3 rtl:space-x-reverse h-min -ml-1 !overflow-visible">
-                    {project.users.map((user) => (
+                    {project.users.map((user, index) => (
                         <div
-                            key={user.id}
+                            key={index}
                             className="tooltip lg:tooltip-top tooltip-left"
                             data-tip={user.name}
                         >
@@ -108,17 +113,17 @@ const ProjectCard = ({
             </div>
             <div className="lg:row-start-3 lg:col-start-2 row-start-3 col-start-1 lg:col-span-1 col-span-2 flex flex-wrap gap-x-4 gap-y-1 text-sm items-end">
                 <Iconed text={project.type} size={4} className="capitalize" />
-                {project.categories.map((categories) => (
+                {project.categories.map((category, index) => (
                     <Iconed
-                        key={categories}
+                        key={index}
                         className="!gap-1"
-                        text={categories}
+                        text={category.replace("-", " ")}
                         size={4}
                     />
                 ))}
-                {project.loaders.map((loaders) => (
+                {project.loaders.map((loaders, index) => (
                     <Iconed
-                        key={loaders}
+                        key={index}
                         className="!gap-1"
                         text={loaders}
                         size={4}

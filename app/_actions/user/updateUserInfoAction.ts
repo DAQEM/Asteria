@@ -20,10 +20,6 @@ const updateUserInfoAction = async (
         errors.name = ["Name is required"];
     }
 
-    if (!userData.bio) {
-        errors.bio = ["Bio is required"];
-    }
-
     if (Object.keys(errors).length > 0) {
         return {
             errors,
@@ -32,7 +28,7 @@ const updateUserInfoAction = async (
 
     const response: ApiResponse<User> = await new UsersApi().updateUser(
         userData.name!,
-        userData.bio!
+        userData.bio
     );
 
     if (!response.success) {

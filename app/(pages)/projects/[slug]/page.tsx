@@ -1,7 +1,8 @@
 import BodyContainer from "@/app/_components/BodyContainer";
 import Iconed from "@/app/_components/icon/Iconed";
+import Markdown from "@/app/_components/input/Markdown";
+import MarkdownToc from "@/app/_components/input/MarkdownToc";
 import ProjectsApi from "@/app/_lib/common/api/projectsApi";
-import { renderMarkdownString } from "@/app/_lib/common/markdown";
 import moment from "moment";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -24,7 +25,7 @@ export default async function Page({
 
     return (
         <BodyContainer>
-            <div className="py-8 breadcrumbs text-sm">
+            <div className="breadcrumbs text-sm">
                 <ul>
                     <li>
                         <a href="/">Home</a>
@@ -35,10 +36,16 @@ export default async function Page({
                     <li>{project.name}</li>
                 </ul>
             </div>
-            <div className="grid grid-rows-[max-content,max-content,max-content] lg:grid-rows-[max-content,max-content] grid-cols-1 lg:grid-cols-[1fr,20rem] gap-4 mb-8">
+            <div className="grid grid-rows-[max-content,max-content,max-content] lg:grid-rows-[max-content,max-content] grid-cols-1 lg:grid-cols-[1fr,20rem] gap-4 mt-6">
                 <div className="grid grid-cols-[max-content,1fr] gap-4 col-span-1 lg:col-span-2">
-                    <div className="lg:size-32 size-24 rounded-md overflow-hidden">
-                        <img src={project.image_url} alt={project.name} />
+                    <div className="size-24 rounded-md overflow-hidden">
+                        <Image
+                            src={project.image_url}
+                            alt={project.name}
+                            width={96}
+                            height={96}
+                            className="rounded-md"
+                        />
                     </div>
                     <div className="grid grid-rows-[max-content,1fr,max-content] gap-1 h-full">
                         <div className="flex gap-2 items-center">
@@ -102,14 +109,10 @@ export default async function Page({
                     </div>
                 </div>
                 <div className="lg:col-start-1 lg:row-start-2 simple-card h-max">
-                    <div
-                        className="markdown-body"
-                        dangerouslySetInnerHTML={{
-                            __html: renderMarkdownString(project.description),
-                        }}
-                    ></div>
+                    <Markdown content={project.description} />
                 </div>
                 <div className="lg:col-start-2 lg:row-start-2 flex flex-col gap-4">
+                    <MarkdownToc content={project.description} />
                     {(project.git_hub_url ||
                         project.curse_forge_url ||
                         project.modrinth_url) && (
@@ -159,9 +162,9 @@ export default async function Page({
                                 Authors
                             </span>
                             <div className="font-medium">
-                                {project.users.map((author) => (
+                                {project.users.map((author, index) => (
                                     <a
-                                        key={author.id}
+                                        key={index}
                                         href={`/users/${author.name}`}
                                         className="flex items-center hover:underline underline-offset-2 mt-2"
                                     >
@@ -183,10 +186,10 @@ export default async function Page({
                             Categories
                         </span>
                         <div className="font-medium">
-                            {project.categories.map((category) => (
+                            {project.categories.map((category, index) => (
                                 <Iconed
-                                    key={category}
-                                    text={category}
+                                    key={index}
+                                    text={category.replace(/-/g, " ")}
                                     size={4}
                                     className="capitalize mt-2"
                                 />
@@ -196,9 +199,9 @@ export default async function Page({
                     <div className="simple-card">
                         <span className="text-lg font-semibold">Loaders</span>
                         <div className="font-medium">
-                            {project.loaders.map((loader) => (
+                            {project.loaders.map((loader, index) => (
                                 <Iconed
-                                    key={loader}
+                                    key={index}
                                     text={loader}
                                     size={4}
                                     className="capitalize mt-2"

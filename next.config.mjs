@@ -8,6 +8,12 @@ const nextConfig = {
                 port: "",
                 pathname: "/avatars/**",
             },
+            {
+                protocol: "https",
+                hostname: "cdn.modrinth.com",
+                port: "",
+                pathname: "/data/**",
+            },
         ],
     },
     pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],

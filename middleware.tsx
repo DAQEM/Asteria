@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import AuthAPI from "./app/_lib/common/api/authAPI";
+import AuthApi from "./app/_lib/common/api/authApi";
+import UsersApi from "./app/_lib/common/api/usersApi";
+import URLHandler from "./app/_lib/common/urlHandler";
 
-const accessTokenCookieName = "hestia-auth-token";
+const accessTokenCookieName = "auth-token";
 
 export async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
@@ -10,28 +12,54 @@ export async function middleware(request: NextRequest) {
         return NextResponse.next();
     }
 
-    // Store current request url in a custom header, which you can read later
-    const requestHeaders = request.headers;
-    requestHeaders.set("x-pathname", pathname);
+    const nextResponse = NextResponse.next({
+        request: {
+            headers: request.headers,
+        },
+    });
+
+    nextResponse.headers.set("x-pathname", pathname);
 
     const cookies = request.cookies;
     const access_token = cookies.get(accessTokenCookieName)?.value;
     if (access_token) {
-        const response = await new AuthAPI().authenticate();
-        
-        if (response.success) {
-            requestHeaders.set("x-user", JSON.stringify(response.data));
+        const meResponse = await new UsersApi().me();
+        if (meResponse.success) {
+            nextResponse.headers.set("x-user", JSON.stringify(meResponse.data));
         } else {
-            cookies.delete(accessTokenCookieName);
+            const refreshResponse = await new AuthApi().refreshToken();
+            if (refreshResponse.success) {
+                //set new token to cookie
+                const token = refreshResponse.data?.token;
+                if (token) {
+                    nextResponse.cookies.set(accessTokenCookieName, token, {
+                        maxAge: 60 * 60 * 24 * 90, // 90 days
+                    });
+                    const meResponse = await new UsersApi().me(token);
+                    if (meResponse.success) {
+                        nextResponse.headers.set(
+                            "x-user",
+                            JSON.stringify(meResponse.data)
+                        );
+                    } else {
+                        console.error(
+                            "Failed to get user after refreshing token"
+                        );
+                        return handleLogout(request);
+                    }
+                    return nextResponse;
+                } else {
+                    console.error("Failed to get token after refreshing token");
+                    return handleLogout(request);
+                }
+            } else {
+                console.error("Failed to refresh token");
+                return handleLogout(request);
+            }
         }
     }
 
-    return NextResponse.next({
-        request: {
-            // Apply new request headers
-            headers: requestHeaders,
-        },
-    });
+    return nextResponse;
 }
 
 export const config = {
@@ -41,10 +69,10 @@ export const config = {
 };
 
 function handleLogout(request: NextRequest): NextResponse {
-    // Redirect to the home page without the accessToken cookie
-    const response = NextResponse.redirect(new URL("/", request.url));
-    response.cookies.set(accessTokenCookieName, "", {
-        maxAge: 0,
-    });
-    return response;
+    const url = new URL(request.url);
+    const returnUrl = url.searchParams.get("returnUrl");
+    const logoutUrl = URLHandler.getLogoutURL(
+        returnUrl || URLHandler.getAsteriaURL()
+    );
+    return NextResponse.redirect(logoutUrl);
 }

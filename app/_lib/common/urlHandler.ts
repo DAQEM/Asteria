@@ -12,17 +12,17 @@ class URLHandler {
     }
 
     static getBaseAuthApiURL() {
-        return this.getBaseApiURL() + "/v1/authentication";
+        return this.getBaseApiURL() + "/v1/auth";
     }
 
     static getLoginURL(provider: string, returnUrl: string) {
         return (
             this.getBaseAuthApiURL() +
-            `/login/${provider}?returnUrl=${returnUrl}`
+            `/login?provider=${provider}&returnUrl=${this.getAsteriaURL()}/auth/login-success?url=${returnUrl}`
         );
     }
 
-    static getLogoutURL(returnUrl: string) {
+    static getLogoutURL(returnUrl: string) {``
         return this.getBaseAuthApiURL() + `/logout?returnUrl=${returnUrl}`;
     }
 }

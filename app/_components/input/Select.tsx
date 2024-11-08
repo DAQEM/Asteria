@@ -7,10 +7,12 @@ const Select = ({
     searchParam,
     options,
     defaultValue,
+    debounce = 500,
 }: {
     searchParam: string;
     options: { value: string; label: string }[];
     defaultValue?: string;
+    debounce?: number;
 }) => {
     const searchParams = useSearchParams();
     const pathname = usePathname();
@@ -24,16 +26,20 @@ const Select = ({
             params.delete(searchParam);
         }
         replace(`${pathname}?${params.toString()}`);
-    }, 500);
+    }, debounce);
 
     return (
         <select
             className="select select-bordered grow"
             onChange={(e) => handleSelect(e.target.value)}
-            defaultValue={searchParams.get(searchParam) || defaultValue || options[0].value}
+            defaultValue={
+                searchParams.get(searchParam) ||
+                defaultValue ||
+                options[0].value
+            }
         >
-            {options.map((option) => (
-                <option key={option.value} value={option.value}>
+            {options.map((option, index) => (
+                <option key={index} value={option.value}>
                     {option.label}
                 </option>
             ))}

@@ -2,13 +2,14 @@ import Image from "next/image";
 import { FaCog } from "react-icons/fa";
 import { FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { SiBisecthosting, SiCurseforge, SiModrinth } from "react-icons/si";
-import DiscountBanner from "./DiscountBanner";
+import BodyContainer from "../BodyContainer";
+import DiscountBanner from "../DiscountBanner";
 
 const Footer = () => {
     return (
-        <>
+        <BodyContainer type="full" className="!p-0">
             <footer className="bg-base-200">
-                <div className="footer text-base-content p-10 mt-24 max-w-7xl mx-auto !grid-cols-[1fr,1fr,1fr,max-content]">
+                <div className="footer text-base-content p-10 mt-24 max-w-7xl mx-auto !grid-cols-[1fr,1fr] lg:!grid-cols-[1fr,1fr,1fr,max-content]">
                     <nav>
                         <h6 className="footer-title">Services</h6>
                         <a href="/projects" className="link link-hover">
@@ -87,7 +88,7 @@ const Footer = () => {
                     </div>
                 </nav>
             </footer>
-        </>
+        </BodyContainer>
     );
 };
 

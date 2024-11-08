@@ -1,20 +1,18 @@
-import { cookies } from "next/headers";
 import BaseApi from "./baseApi";
 
-class AuthAPI extends BaseApi {
+class AuthApi extends BaseApi {
     constructor() {
-        super("/v1/authentication");
+        super("/v1/auth");
     }
 
-    async authenticate(): Promise<ApiResponse<User>> {
-        const response = await fetch(this.getApiUrl() + "/me", {
-            headers: {
-                Authorization: cookies().get("hestia-auth-token")?.value || "",
-            },
+    async refreshToken(): Promise<ApiResponse<RefreshTokenResponse>> {
+        const response = await fetch(this.getApiUrl() + "/refresh", {
+            headers: this.getAuthenticationHeader(),
+            cache: "no-cache",
         });
 
         return this.handleApiResponse(response);
     }
 }
 
-export default AuthAPI;
+export default AuthApi;
